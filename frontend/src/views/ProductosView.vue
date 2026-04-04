@@ -6,17 +6,17 @@
       <div class="absolute -top-24 -left-20 w-96 h-96 rounded-full bg-cyan-300/20 blur-3xl"></div>
       <div class="absolute -bottom-28 -right-16 w-96 h-96 rounded-full bg-amber-300/20 blur-3xl"></div>
 
-      <div class="relative max-w-7xl mx-auto px-4 py-14 md:py-20 grid lg:grid-cols-12 gap-8 items-center" data-reveal>
+      <div class="relative max-w-7xl mx-auto px-4 py-10 md:py-14 lg:py-16 grid lg:grid-cols-12 gap-6 lg:gap-8 items-center" data-reveal>
         <div class="lg:col-span-7" data-reveal>
           <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm font-semibold mb-5">
             <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
             Selección destacada para tu hogar
           </p>
-          <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight tracking-tight">
             Tu vitrina digital,
             <span class="text-amber-300">con lo mejor para tu familia</span>
           </h1>
-          <p class="mt-5 text-blue-100 text-lg max-w-2xl">
+          <p class="mt-4 text-blue-100 text-base md:text-lg max-w-2xl">
             Descubre variedad, calidad y precios competitivos en cada categoría.
             Compra fácil, rápida y con toda la confianza de Super Latino Store.
           </p>
@@ -30,29 +30,29 @@
             </RouterLink>
           </div>
 
-          <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             <div class="rounded-xl bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
               <p class="text-blue-100 text-sm">Productos</p>
-              <p class="text-3xl font-extrabold">{{ stats.totalProducts }}</p>
+              <p class="text-2xl lg:text-3xl font-extrabold">{{ stats.totalProducts }}</p>
             </div>
             <div class="rounded-xl bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
               <p class="text-blue-100 text-sm">Departamentos</p>
-              <p class="text-3xl font-extrabold">{{ stats.totalDepartments }}</p>
+              <p class="text-2xl lg:text-3xl font-extrabold">{{ stats.totalDepartments }}</p>
             </div>
             <div class="rounded-xl bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
               <p class="text-blue-100 text-sm">Categorías</p>
-              <p class="text-3xl font-extrabold">{{ stats.totalCategories }}</p>
+              <p class="text-2xl lg:text-3xl font-extrabold">{{ stats.totalCategories }}</p>
             </div>
             <div class="rounded-xl bg-white/10 border border-white/20 p-4 backdrop-blur-sm">
               <p class="text-blue-100 text-sm">Con descuento</p>
-              <p class="text-3xl font-extrabold">{{ stats.onSale }}</p>
+              <p class="text-2xl lg:text-3xl font-extrabold">{{ stats.onSale }}</p>
             </div>
           </div>
         </div>
 
         <div class="lg:col-span-5" data-reveal>
           <article class="rounded-3xl overflow-hidden bg-white text-slate-900 shadow-2xl border border-slate-200">
-            <div class="relative h-60 bg-slate-100">
+            <div class="relative h-52 sm:h-56 lg:h-60 bg-slate-100">
               <img
                 v-if="heroProduct"
                 :src="getImageUrl(heroProduct.images?.[0]?.url)"
@@ -68,12 +68,12 @@
 
             <div class="p-5">
               <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold">Producto protagonista</p>
-              <h2 class="text-2xl font-black mt-2 line-clamp-2">{{ heroProduct?.name || 'Tu catálogo aparecerá aquí' }}</h2>
+              <h2 class="text-xl lg:text-2xl font-black mt-2 line-clamp-2">{{ heroProduct?.name || 'Tu catálogo aparecerá aquí' }}</h2>
               <p class="mt-2 text-slate-600 text-sm line-clamp-2">{{ heroProduct?.description || 'Muy pronto encontrarás aquí nuestras mejores recomendaciones.' }}</p>
 
               <div v-if="heroProduct" class="mt-4 flex items-center justify-between">
                 <div>
-                  <p class="text-3xl font-extrabold text-blue-700">${{ formatPrice(heroProduct.price) }}</p>
+                  <p class="text-2xl lg:text-3xl font-extrabold text-blue-700">${{ formatPrice(heroProduct.price) }}</p>
                   <p v-if="heroProduct.originalPrice" class="text-sm text-slate-400 line-through">${{ formatPrice(heroProduct.originalPrice) }}</p>
                 </div>
                 <button @click="goToProduct(heroProduct)" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
@@ -86,12 +86,12 @@
       </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-4 py-10" data-reveal>
+    <section class="max-w-7xl mx-auto px-4 py-6 md:py-8" data-reveal>
       <div class="flex flex-wrap gap-3">
         <button
           @click="selectedDepartment = ''"
           :class="selectedDepartment === '' ? 'bg-slate-900 text-white' : 'bg-white text-slate-700 border border-slate-200'"
-          class="px-4 py-2 rounded-full font-semibold transition"
+          class="px-3 md:px-4 py-2 rounded-full font-semibold text-sm md:text-base transition"
         >
           Todos
         </button>
@@ -100,41 +100,41 @@
           :key="dept._id"
           @click="selectedDepartment = dept._id"
           :class="selectedDepartment === dept._id ? 'bg-blue-600 text-white' : 'bg-white text-slate-700 border border-slate-200'"
-          class="px-4 py-2 rounded-full font-semibold transition"
+          class="px-3 md:px-4 py-2 rounded-full font-semibold text-sm md:text-base transition"
         >
           {{ dept.icon || '🏬' }} {{ dept.name }}
         </button>
         <RouterLink
           :to="selectedDepartment ? `/catalogo?department=${selectedDepartment}` : '/catalogo'"
-          class="ml-auto px-4 py-2 rounded-full bg-amber-400 text-slate-900 font-bold hover:bg-amber-300 transition"
+          class="w-full sm:w-auto sm:ml-auto px-4 py-2 rounded-full bg-amber-400 text-slate-900 font-bold text-center hover:bg-amber-300 transition"
         >
           Abrir en catálogo
         </RouterLink>
       </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 pb-16 space-y-12">
+    <main class="max-w-7xl mx-auto px-4 pb-16 space-y-10 md:space-y-12">
       <section data-reveal>
-        <div class="flex items-end justify-between mb-5">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
           <div>
-            <h3 class="text-3xl font-black text-slate-900">Nuevos en tienda</h3>
+            <h3 class="text-2xl md:text-3xl font-black text-slate-900">Nuevos en tienda</h3>
             <p class="text-slate-500">Nuevas llegadas para ti</p>
           </div>
           <RouterLink to="/catalogo" class="text-blue-700 font-semibold hover:underline">Ver todos</RouterLink>
         </div>
 
-        <div v-if="loading" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div v-if="loading" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <div v-for="i in 8" :key="i" class="h-80 rounded-2xl bg-slate-200/60 animate-pulse"></div>
         </div>
 
-        <div v-else-if="filteredNewProducts.length" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div v-else-if="filteredNewProducts.length" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <article
             v-for="(product, index) in filteredNewProducts"
             :key="product._id"
             class="group rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl transition overflow-hidden reveal-card"
             :style="{ animationDelay: `${index * 60}ms` }"
           >
-            <button class="w-full h-48 bg-slate-100" @click="goToProduct(product)">
+            <button class="w-full h-44 md:h-48 bg-slate-100" @click="goToProduct(product)">
               <img
                 v-if="product.images?.[0]?.url"
                 :src="getImageUrl(product.images[0].url)"
@@ -175,15 +175,15 @@
       </section>
 
       <section data-reveal>
-        <div class="flex items-end justify-between mb-5">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
           <div>
-            <h3 class="text-3xl font-black text-slate-900">Ofertas imperdibles de la semana</h3>
+            <h3 class="text-2xl md:text-3xl font-black text-slate-900">Ofertas imperdibles de la semana</h3>
             <p class="text-slate-500">Productos seleccionados con precios especiales</p>
           </div>
           <RouterLink to="/catalogo?onSale=true" class="text-rose-700 font-semibold hover:underline">Ver ofertas</RouterLink>
         </div>
 
-        <div v-if="onSaleProducts.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div v-if="onSaleProducts.length" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
           <article v-for="(product, index) in onSaleProducts" :key="product._id" class="rounded-2xl bg-gradient-to-br from-rose-50 to-white border border-rose-100 p-4 shadow-sm reveal-card" :style="{ animationDelay: `${index * 80}ms` }">
             <div class="flex items-start gap-4">
               <img
@@ -220,6 +220,7 @@
 
     <Cart />
     <Footer />
+    <StoreVisitPopup />
   </div>
 </template>
 
@@ -229,6 +230,7 @@ import { RouterLink, useRouter } from 'vue-router'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Cart from '../components/Cart.vue'
+import StoreVisitPopup from '../components/StoreVisitPopup.vue'
 import { useCartStore } from '../stores/cart'
 import { useToast } from '../composables/useToast'
 

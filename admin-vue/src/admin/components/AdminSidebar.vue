@@ -22,6 +22,7 @@ const items = [
   { to: '/categories', label: '📂 Categorias' },
   { to: '/departments', label: '🏬 Departamentos' },
   { to: '/services', label: '⚡ Servicios' },
+  { to: '/orders', label: '🧾 Pedidos' },
   { to: '/settings', label: '⚙️ Configuracion' }
 ]
 </script>

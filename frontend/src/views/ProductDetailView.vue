@@ -144,6 +144,12 @@
             <span v-else class="text-red-600 font-semibold flex items-center gap-2">
               ❌ Agotado
             </span>
+            <span
+              v-if="isVirtualOrderProduct"
+              class="text-xs font-semibold uppercase tracking-wide bg-latino-green/10 text-latino-green px-3 py-1 rounded"
+            >
+              Solo tienda virtual
+            </span>
           </div>
 
           <!-- Description -->

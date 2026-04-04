@@ -94,6 +94,12 @@
                 <span v-else class="text-red-600 font-semibold">
                   ❌ Agotado
                 </span>
+                <span
+                  v-if="isVirtualOrderProduct"
+                  class="text-xs font-semibold uppercase tracking-wide bg-latino-green/10 text-latino-green px-2 py-1 rounded"
+                >
+                  Solo tienda virtual
+                </span>
               </div>
 
               <!-- Actions -->
@@ -108,7 +114,7 @@
                       ? 'bg-gradient-to-r from-latino-green to-green-700 hover:from-green-700 hover:to-green-800 text-white'
                       : 'bg-gradient-to-r from-latino-blue to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white'"
                 >
-                  {{ isVirtualOrderProduct ? '📲 Comprar ahora' : '🛒 Agregar al Carrito' }}
+                  <span>{{ isVirtualOrderProduct ? '📲 Comprar ahora' : '🛒 Agregar al Carrito' }}</span>
                 </button>
 
                 <button

@@ -1,7 +1,7 @@
 <template>
   <header class="bg-white shadow-xl sticky top-0 z-50">
     <!-- Top Bar - Sliding Panel -->
-    <div class="bg-gradient-to-r from-latino-blue to-blue-600 text-white py-2 overflow-hidden">
+    <div class="bg-gradient-to-r from-latino-blue to-blue-600 text-white py-1 overflow-hidden">
       <div class="container mx-auto px-4">
         <div class="flex justify-between items-center text-sm">
           <!-- Sliding Panel -->
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Main Header - Innovative Design -->
-    <div class="bg-white py-6">
+    <div class="bg-white py-3">
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between">
           <!-- Mobile Menu Button -->
@@ -69,22 +69,22 @@
 
           <!-- Logo Section - Enhanced -->
           <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-4 group cursor-pointer">
+            <RouterLink to="/productos" class="flex items-center space-x-4 group">
               <div class="relative">
                 <img
                   src="/logo-superlatino.png"
                   alt="Super Latino Store Logo"
-                  class="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                  class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-110"
                 />
                 <div class="absolute -top-1 -right-1 w-4 h-4 bg-latino-yellow rounded-full animate-pulse"></div>
               </div>
               <div class="hidden sm:block">
-                <h1 class="text-3xl font-bold bg-gradient-to-r from-latino-blue to-blue-600 bg-clip-text text-transparent leading-tight">
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-latino-blue to-blue-600 bg-clip-text text-transparent leading-tight">
                   <span class="text-latino-red">Super</span> Latino Store
                 </h1>
                 <p class="text-sm text-gray-600 font-medium">Ahorra dinero. Vive mejor. ✨</p>
               </div>
-            </div>
+            </RouterLink>
           </div>
 
           <!-- Mega Search Bar -->
@@ -96,7 +96,7 @@
                   v-model="searchQuery"
                   type="text"
                   placeholder="¿Qué estás buscando hoy? 🔍"
-                  class="w-full px-6 py-4 pr-16 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-0 text-lg"
+                  class="w-full px-6 py-3 pr-16 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-0 text-base"
                 />
                 <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-latino-blue to-blue-600 text-white rounded-full p-3 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:scale-110 shadow-lg">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,12 +267,12 @@
     <!-- Navigation - Modern & Dynamic -->
     <nav class="bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200">
       <div class="container mx-auto px-4">
-        <div class="hidden lg:flex space-x-1 py-4">
-          <a href="/catalogo" class="relative px-4 py-3 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group">
+        <div class="hidden lg:flex space-x-1 py-2">
+          <a href="/catalogo" class="relative px-3 py-2 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group">
             <span class="relative z-10">🏪 Catalogo</span>
             <div class="absolute inset-0 bg-gradient-to-r from-latino-blue to-blue-600 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
           </a>
-          <a href="/catalogo?onSale=true" class="relative px-4 py-3 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group">
+          <a href="/catalogo?onSale=true" class="relative px-3 py-2 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group">
             <span class="relative z-10">🔥 Ofertas del Dia</span>
             <div class="absolute inset-0 bg-gradient-to-r from-latino-red to-red-600 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
           </a>
@@ -280,7 +280,7 @@
             v-for="department in navDepartments"
             :key="department._id"
             :href="`/catalogo?department=${department._id}`"
-            class="relative px-4 py-3 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group"
+            class="relative px-3 py-2 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group"
           >
             <span class="relative z-10">{{ department.icon || '🏬' }} {{ department.name }}</span>
             <div class="absolute inset-0 bg-gradient-to-r from-latino-blue to-blue-600 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
@@ -289,7 +289,7 @@
             v-for="category in navCategories"
             :key="category._id"
             :href="`/catalogo?category=${category._id}`"
-            class="relative px-4 py-3 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group"
+            class="relative px-3 py-2 rounded-full text-gray-700 hover:text-latino-blue font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-md group"
           >
             <span class="relative z-10">📂 {{ category.name }}</span>
             <div class="absolute inset-0 bg-gradient-to-r from-latino-yellow to-yellow-500 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
@@ -402,5 +402,23 @@ onMounted(loadNavigationData)
 
 .slide-left-leave-to .absolute.left-0 {
   transform: translateX(-100%);
+}
+
+/* Smooth edge mask for scrolling banner */
+.animate-scroll {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
 }
 </style>

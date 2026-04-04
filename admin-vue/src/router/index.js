@@ -6,6 +6,7 @@ import AdminProductsView from '../admin/views/AdminProductsView.vue'
 import AdminCategoriesView from '../admin/views/AdminCategoriesView.vue'
 import AdminDepartmentsView from '../admin/views/AdminDepartmentsView.vue'
 import AdminServicesView from '../admin/views/AdminServicesView.vue'
+import AdminOrdersView from '../admin/views/AdminOrdersView.vue'
 import AdminSettingsView from '../admin/views/AdminSettingsView.vue'
 
 const router = createRouter({
@@ -28,6 +29,7 @@ const router = createRouter({
         { path: 'categories', name: 'admin-categories', component: AdminCategoriesView, meta: { title: 'Categorias' } },
         { path: 'departments', name: 'admin-departments', component: AdminDepartmentsView, meta: { title: 'Departamentos' } },
         { path: 'services', name: 'admin-services', component: AdminServicesView, meta: { title: 'Servicios' } },
+        { path: 'orders', name: 'admin-orders', component: AdminOrdersView, meta: { title: 'Pedidos' } },
         { path: 'settings', name: 'admin-settings', component: AdminSettingsView, meta: { title: 'Configuracion' } }
       ]
     }

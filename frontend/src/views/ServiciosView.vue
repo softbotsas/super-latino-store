@@ -213,6 +213,7 @@
     </main>
 
     <Footer />
+    <StoreVisitPopup />
   </div>
 </template>
 
@@ -221,6 +222,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import StoreVisitPopup from '../components/StoreVisitPopup.vue'
 import { useToast } from '../composables/useToast'
 
 const toast = useToast()

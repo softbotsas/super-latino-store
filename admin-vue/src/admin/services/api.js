@@ -144,6 +144,18 @@ export const api = {
     }
   },
 
+  orders: {
+    list(params = '') {
+      return request(`/orders${params ? `?${params}` : ''}`)
+    },
+    updateStatus(id, status) {
+      return request(`/orders/${id}/status`, {
+        method: 'PUT',
+        body: JSON.stringify({ status })
+      })
+    }
+  },
+
   upload: {
     image(formData) {
       return request('/upload', { method: 'POST', body: formData })

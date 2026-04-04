@@ -36,6 +36,7 @@ const productRoutes = require('./routes/products');
 const categoryRoutes = require('./routes/categories');
 const serviceRoutes = require('./routes/services');
 const serviceCategoryRoutes = require('./routes/service-categories');
+const orderRoutes = require('./routes/orders');
 const departmentRoutes = require('./routes/departments');
 const uploadRoutes = require('./routes/upload');
 const statsRoutes = require('./routes/stats');
@@ -57,6 +58,7 @@ app.use('/api/categories', protectAdminWrites, categoryRoutes);
 app.use('/api/services', protectAdminWrites, serviceRoutes);
 app.use('/api/service-categories', protectAdminWrites, serviceCategoryRoutes);
 app.use('/api/departments', protectAdminWrites, departmentRoutes);
+app.use('/api/orders', orderRoutes);
 app.use('/api/upload', authenticateToken, requireAdmin, uploadRoutes);
 app.use('/api/stats', authenticateToken, requireAdmin, statsRoutes);
 
