@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Latino Store - Panel Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>🏪 Super Latino Store</h1>
+        <p>Panel de Administración</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required placeholder="admin@superlatino.com">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" required placeholder="••••••••">
+        </div>
+
+        <button type="submit" class="btn-login">Iniciar Sesión</button>
+      </form>
+
+      <div id="loginMessage" class="login-message"></div>
+
+      <div class="login-footer">
+        <p>¿Primera vez? Ejecuta <code>npm run seed</code> en el backend</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Admin Panel -->
+  <div id="adminPanel" class="admin-panel" style="display: none;">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <h2>🏪 Super Latino</h2>
+        <p>Panel Admin</p>
+      </div>
+
+      <nav class="nav">
+        <a href="#" class="nav-item active" data-page="dashboard">
+          <span>📊</span> Dashboard
+        </a>
+        <a href="#" class="nav-item" data-page="products">
+          <span>📦</span> Productos
+        </a>
+        <a href="#" class="nav-item" data-page="categories">
+          <span>📂</span> Categorías
+        </a>
+        <a href="#" class="nav-item" data-page="departments">
+          <span>🏬</span> Departamentos
+        </a>
+        <a href="#" class="nav-item" data-page="services">
+          <span>⚡</span> Servicios
+        </a>
+        <a href="#" class="nav-item" data-page="settings">
+          <span>⚙️</span> Configuración
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div>
+            <p class="user-name" id="userName">Administrador</p>
+            <p class="user-role" id="userRole">Super Admin</p>
+          </div>
+        </div>
+        <button class="btn-logout" id="btnLogout">Cerrar Sesión</button>
+      </div>
+    </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-left">
+        <button class="btn-menu" id="btnMenu">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <div class="search-box">
+          <input type="text" placeholder="Buscar..." id="globalSearch">
+          <span>🔍</span>
+        </div>
+        <button class="btn-notifications">
+          <span>🔔</span>
+          <span class="badge">3</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Body -->
+    <main class="main-body">
+
+    <!-- Pages Container -->
+    <div class="content">
+      <!-- Dashboard Page -->
+      <div id="dashboard" class="page active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue">📦</div>
+            <div class="stat-details">
+              <h3 id="totalProducts">0</h3>
+              <p>Total Productos</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">⚡</div>
+            <div class="stat-details">
+              <h3 id="totalServices">0</h3>
+              <p>Servicios Activos</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple">📂</div>
+            <div class="stat-details">
+              <h3 id="totalCategories">0</h3>
+              <p>Categorías</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">🏬</div>
+            <div class="stat-details">
+              <h3 id="totalDepartments">0</h3>
+              <p>Departamentos</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red">⚠️</div>
+            <div class="stat-details">
+              <h3 id="lowStockProducts">0</h3>
+              <p>Stock Bajo</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon yellow">💰</div>
+            <div class="stat-details">
+              <h3 id="inventoryValue">$0.00</h3>
+              <p>Valor Inventario</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-card">
+          <h2>👋 Bienvenido al Panel de Administración</h2>
+          <p>Desde aquí puedes gestionar todos los productos, servicios y configuraciones de Super Latino Store.</p>
+          <div class="quick-actions">
+            <button class="btn btn-primary" onclick="navigateTo('products')">
+              ➕ Agregar Producto
+            </button>
+            <button class="btn btn-secondary" onclick="navigateTo('services')">
+              ⚡ Agregar Servicio
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Page -->
+      <div id="products" class="page">
+        <div class="page-header">
+          <h2>Gestión de Productos</h2>
+          <div class="flex items-center gap-2">
+            <button class="btn btn-primary" onclick="openProductModal()">
+              ➕ Nuevo Producto
+            </button>
+            <button class="btn btn-secondary" onclick="toggleBulkMode()" id="bulkModeBtn">
+              ☑️ Selección Múltiple
+            </button>
+            <button class="btn btn-danger" onclick="bulkDelete()" id="bulkDeleteBtn" style="display: none;">
+              🗑️ Eliminar Seleccionados
+            </button>
+          </div>
+        </div>
+
+        <div class="filters">
+          <select id="filterDepartment" onchange="loadProducts()">
+            <option value="">Todos los departamentos</option>
+          </select>
+          <select id="filterCategory" onchange="loadProducts()">
+            <option value="">Todas las categorías</option>
+          </select>
+          <select id="filterStock" onchange="loadProducts()">
+            <option value="">Todo el stock</option>
+            <option value="low">Stock bajo (&lt; 10)</option>
+            <option value="out">Sin stock</option>
+          </select>
+          <input type="text" placeholder="Buscar productos..." id="searchProducts" onkeyup="loadProducts()">
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th id="bulkCheckHeader" style="display: none;">
+                  <input type="checkbox" id="selectAllProducts" onchange="selectAllProducts(this)">
+                </th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>SKU</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <tr>
+                <td colspan="9" class="loading">Cargando productos...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination" id="productsPagination"></div>
+      </div>
+
+      <!-- Categories Page -->
+      <div id="categories" class="page">
+        <div class="page-header">
+          <h2>Gestión de Categorías</h2>
+          <button class="btn btn-primary" onclick="openCategoryModal()">
+            ➕ Nueva Categoría
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Slug</th>
+                <th>Departamento</th>
+                <th>Orden</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="categoriesTableBody">
+              <tr>
+                <td colspan="6" class="loading">Cargando categorías...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Departments Page -->
+      <div id="departments" class="page">
+        <div class="page-header">
+          <h2>Gestión de Departamentos</h2>
+          <button class="btn btn-primary" onclick="openDepartmentModal()">
+            ➕ Nuevo Departamento
+          </button>
+        </div>
+
+        <div class="departments-grid" id="departmentsGrid">
+          <div class="loading">Cargando departamentos...</div>
+        </div>
+      </div>
+
+      <!-- Services Page -->
+      <div id="services" class="page">
+        <div class="page-header">
+          <h2>Gestión de Servicios</h2>
+          <button class="btn btn-primary" onclick="openServiceModal()">
+            ➕ Nuevo Servicio
+          </button>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+          <div class="loading">Cargando servicios...</div>
+        </div>
+      </div>
+
+      <!-- Settings Page -->
+      <div id="settings" class="page">
+        <div class="page-header">
+          <h2>Configuración</h2>
+        </div>
+
+        <div class="settings-card">
+          <h3>Conexión API</h3>
+          <div class="form-group">
+            <label>URL de la API</label>
+            <input type="text" id="apiUrl" value="http://localhost:5000/api">
+          </div>
+          <button class="btn btn-primary" onclick="saveSettings()">Guardar</button>
+        </div>
+
+        <div class="settings-card">
+          <h3>Base de Datos</h3>
+          <button class="btn btn-secondary" onclick="seedDatabase()">
+            🌱 Poblar Base de Datos
+          </button>
+          <p class="text-muted">Inserta datos de ejemplo en la base de datos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Product -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="productModalTitle">Nuevo Producto</h3>
+        <button class="btn-close" onclick="closeProductModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="productForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>SKU *</label>
+              <input type="text" name="sku" required>
+            </div>
+            <div class="form-group">
+              <label>Precio *</label>
+              <input type="number" name="price" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label>Stock *</label>
+              <input type="number" name="stock" required>
+            </div>
+            <div class="form-group">
+              <label>Departamento *</label>
+              <select name="department" id="productDepartment" required></select>
+            </div>
+            <div class="form-group">
+              <label>Categoría *</label>
+              <select name="category" id="productCategory" required></select>
+            </div>
+            <div class="form-group full-width">
+              <label>Descripción *</label>
+              <textarea name="description" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Descuento (%)</label>
+              <input type="number" name="discount" min="0" max="100" value="0">
+            </div>
+            <div class="form-group">
+              <label>Tipo de Producto</label>
+              <select name="productType" id="productType" onchange="toggleSizeManager()">
+                <option value="general">General</option>
+                <option value="alimentos">Alimentos</option>
+                <option value="golosinas">Golosinas</option>
+                <option value="ropa">Ropa de vestir</option>
+                <option value="zapatos">Zapatos</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Canal de Venta</label>
+              <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px;">
+                <label style="display: flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="salesChannel" value="store" checked>
+                  Solo Tienda Física
+                </label>
+                <label style="display: flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="salesChannel" value="virtual">
+                  Solo Tienda Virtual
+                </label>
+                <label style="display: flex; align-items: center; gap: 6px;">
+                  <input type="radio" name="salesChannel" value="both">
+                  Tienda Física + Virtual
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="featured"> Producto Destacado
+              </label>
+            </div>
+            <div class="form-group full-width" id="sizeManager" style="display: none;">
+              <label>Tallas y cantidades</label>
+              <div id="sizeRows" style="display: grid; gap: 8px;"></div>
+              <button type="button" class="btn btn-secondary" onclick="addSizeRow()" style="margin-top: 8px;">+ Agregar talla</button>
+            </div>
+            <div class="form-group full-width">
+              <label>Imagen del Producto *</label>
+              <input type="file" name="image" id="productImage" accept="image/*">
+              <div id="imagePreview" style="margin-top: 10px; display: none;">
+                <img id="previewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 2px solid #ddd;">
+                <button type="button" onclick="removeImagePreview()" style="margin-left: 10px; padding: 5px 10px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Quitar</button>
+              </div>
+              <small style="color: #666; display: block; margin-top: 5px;">Formatos: JPG, PNG, GIF, WEBP (máx. 5MB)</small>
+            </div>
+            <div class="form-group full-width">
+              <label>O URL de Imagen (Alternativa) *</label>
+              <input type="url" name="imageUrl" id="productImageUrl" placeholder="https://ejemplo.com/imagen.jpg">
+              <small style="color: #666; display: block; margin-top: 5px;">Sube un archivo O ingresa una URL (al menos uno es requerido)</small>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeProductModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveProduct()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Category -->
+  <div id="categoryModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="categoryModalTitle">Nueva Categoría</h3>
+        <button class="btn-close" onclick="closeCategoryModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="categoryForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Departamento *</label>
+              <select name="department" id="categoryDepartment" required></select>
+            </div>
+            <div class="form-group full-width">
+              <label>Descripción</label>
+              <textarea name="description" rows="3"></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label>Imagen</label>
+              <div class="image-upload-options">
+                <div class="upload-option">
+                  <label>Subir archivo:</label>
+                  <input type="file" name="imageFile" accept="image/*" onchange="previewCategoryImage(this)">
+                </div>
+                <div class="upload-option">
+                  <label>O URL:</label>
+                  <input type="url" name="imageUrl" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+              </div>
+              <div id="categoryImagePreview" class="image-preview" style="display: none;">
+                <img id="categoryPreviewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 2px solid #ddd;">
+                <button type="button" onclick="removeCategoryImagePreview()" style="margin-top: 10px; padding: 5px 10px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Eliminar Imagen</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeCategoryModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveCategory()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Department -->
+  <div id="departmentModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="departmentModalTitle">Nuevo Departamento</h3>
+        <button class="btn-close" onclick="closeDepartmentModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="departmentForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Emoji</label>
+              <input type="text" name="icon" maxlength="4" placeholder="🏬">
+            </div>
+            <div class="form-group">
+              <label>Color</label>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="color" name="color" id="departmentColor" value="#3B82F6" style="width: 60px; height: 40px; cursor: pointer;">
+                <div id="colorPreview" style="width: 100px; height: 40px; border-radius: 8px; border: 2px solid #ddd; background-color: #3B82F6;"></div>
+                <span id="colorValue" style="font-weight: bold;">#3B82F6</span>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label>Descripción</label>
+              <textarea name="description" rows="3"></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label>Imagen del Departamento *</label>
+              <input type="file" name="image" id="departmentImage" accept="image/*" required>
+              <div id="departmentImagePreview" style="margin-top: 10px; display: none;">
+                <img id="previewDepartmentImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 2px solid #ddd;">
+                <button type="button" onclick="removeDepartmentImagePreview()" style="margin-top: 10px; padding: 5px 10px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Eliminar Imagen</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeDepartmentModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveDepartment()">Guardar</button>
+      </div>
+    </div>
+  </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+

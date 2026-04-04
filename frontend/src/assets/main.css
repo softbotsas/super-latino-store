@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados para Super Latino Store */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-latino-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-latino-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors;
+  }
+
+  .btn-outline {
+    @apply border-2 border-latino-blue text-latino-blue px-6 py-3 rounded-lg font-semibold hover:bg-latino-blue hover:text-white transition-colors;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-latino-blue focus:border-transparent;
+  }
+}
+
+/* Animación del panel deslizante */
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+/* Pausa la animación al hacer hover */
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Efecto de desvanecimiento en los bordes */
+.animate-scroll::before,
+.animate-scroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.animate-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(30, 64, 175, 1), transparent);
+}
+
+.animate-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(30, 64, 175, 1), transparent);
+}
+

@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+coverage/
+**/coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime files
+*.pid
+*.seed
+
+# Uploads generated at runtime (keep folder, ignore files)
+backend/public/uploads/**
+!backend/public/uploads/.gitkeep
+public/uploads/**
+!public/uploads/.gitkeep
