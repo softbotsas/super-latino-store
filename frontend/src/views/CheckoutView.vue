@@ -234,7 +234,7 @@ const isFormValid = computed(() => {
 
 function getImageUrl(url) {
   if (!url) return 'https://via.placeholder.com/100x100?text=Sin+Imagen'
-  if (url.startsWith('/uploads')) return `http://localhost:5000${url}`
+  if (url.startsWith('/uploads')) return `${API_URL.replace(/\/api\/?$/, '')}${url}`
   return url
 }
 

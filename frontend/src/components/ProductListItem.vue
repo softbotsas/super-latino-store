@@ -163,7 +163,8 @@ const productImage = computed(() => {
   }
   const imageUrl = props.product.images?.[0]?.url
   if (!imageUrl) return 'https://via.placeholder.com/400x400?text=Sin+Imagen'
-  if (imageUrl.startsWith('/uploads')) return `http://localhost:5000${imageUrl}`
+  const UPLOADS_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '')
+  if (imageUrl.startsWith('/uploads')) return `${UPLOADS_BASE}${imageUrl}`
   return imageUrl
 })
 

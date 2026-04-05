@@ -147,7 +147,8 @@ const emit = defineEmits(['close', 'add-to-cart'])
 
 const router = useRouter()
 const cartStore = useCartStore()
-const API_URL = 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const UPLOADS_BASE = API_URL.replace(/\/api\/?$/, '')
 
 const product = ref(null)
 const loading = ref(false)
@@ -163,7 +164,7 @@ const isVirtualOrderProduct = computed(() => {
 const productImage = computed(() => {
   const url = product.value?.images?.[0]?.url
   if (!url) return 'https://via.placeholder.com/600x600?text=Sin+Imagen'
-  if (url.startsWith('/uploads')) return `http://localhost:5000${url}`
+  if (url.startsWith('/uploads')) return `${UPLOADS_BASE}${url}`
   return url
 })
 

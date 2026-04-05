@@ -139,7 +139,8 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const API_URL = 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const UPLOADS_BASE = API_URL.replace(/\/api\/?$/, '')
 
 const departments = ref([])
 const loading = ref(true)
@@ -206,7 +207,7 @@ function getDepartmentImage(departmentId) {
   if (dept && dept.image && dept.image.url) {
     // Si la URL empieza con /uploads, agregar el dominio del backend
     if (dept.image.url.startsWith('/uploads')) {
-      return `http://localhost:5000${dept.image.url}`
+      return `${UPLOADS_BASE}${dept.image.url}`
     }
     return dept.image.url
   }

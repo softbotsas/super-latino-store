@@ -67,14 +67,15 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const UPLOADS_BASE = API_URL.replace(/\/api\/?$/, '')
 const router = useRouter()
 const offers = ref([])
 const loading = ref(false)
 
 function getImageUrl(url) {
   if (!url) return 'https://via.placeholder.com/600x400?text=Sin+Imagen'
-  if (url.startsWith('/uploads')) return `http://localhost:5000${url}`
+  if (url.startsWith('/uploads')) return `${UPLOADS_BASE}${url}`
   return url
 }
 

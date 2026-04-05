@@ -260,7 +260,8 @@ const router = useRouter()
 const cartStore = useCartStore()
 const favoritesStore = useFavoritesStore()
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const UPLOADS_BASE = API_URL.replace(/\/api\/?$/, '')
 
 // Mobile Menu
 const isMenuOpen = ref(false)
@@ -295,7 +296,7 @@ const isVirtualOrderProduct = computed(() => {
 // Methods
 function getImageUrl(url) {
   if (!url) return 'https://via.placeholder.com/600x600?text=Sin+Imagen'
-  if (url.startsWith('/uploads')) return `http://localhost:5000${url}`
+  if (url.startsWith('/uploads')) return `${UPLOADS_BASE}${url}`
   return url
 }
 
