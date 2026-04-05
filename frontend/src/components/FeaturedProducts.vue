@@ -108,7 +108,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')
 
 const featuredProducts = ref([])
 const loading = ref(true)
@@ -133,7 +133,7 @@ async function fetchFeaturedProducts() {
 function getImageUrl(url) {
   if (!url) return null
   if (url.startsWith('http')) return url
-  const base = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')
+  const base = (import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')).replace('/api', '')
   return `${base}${url}`
 }
 

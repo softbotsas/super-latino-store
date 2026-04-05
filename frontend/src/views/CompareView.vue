@@ -166,7 +166,7 @@ const isMenuOpen = ref(false)
 
 const compareStore = useCompareStore()
 const cartStore = useCartStore()
-const UPLOADS_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '')
+const UPLOADS_BASE = (import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')).replace(/\/api\/?$/, '')
 
 function getImageUrl(url) {
   if (!url) return 'https://via.placeholder.com/400x400?text=Sin+Imagen'

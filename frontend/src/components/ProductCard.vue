@@ -184,7 +184,7 @@ const productImage = computed(() => {
     return 'https://via.placeholder.com/400x400?text=Sin+Imagen'
   }
   // Si la URL es relativa (empieza con /uploads), convertirla a URL absoluta
-  const UPLOADS_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '')
+  const UPLOADS_BASE = (import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')).replace(/\/api\/?$/, '')
   if (imageUrl.startsWith('/uploads')) {
     return `${UPLOADS_BASE}${imageUrl}`
   }

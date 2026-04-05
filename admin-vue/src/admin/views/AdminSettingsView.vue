@@ -65,7 +65,7 @@ const auth = useAdminAuthStore()
 const toast = useToast()
 
 const user = auth.user
-const apiUrl = ref(localStorage.getItem('apiUrl') || import.meta.env.VITE_API_URL || 'http://localhost:5000/api')
+const apiUrl = ref(localStorage.getItem('apiUrl') || import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api'))
 const connectionStatus = ref('')
 const connectionOk = ref(false)
 

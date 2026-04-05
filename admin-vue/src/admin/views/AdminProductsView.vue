@@ -228,7 +228,7 @@ import { api } from '../services/api'
 import AdminModal from '../components/AdminModal.vue'
 import { useToast } from '../../composables/useToast'
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '')
+const API_BASE = (import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')).replace(/\/api\/?$/, '')
 
 const items = ref([])
 const departments = ref([])

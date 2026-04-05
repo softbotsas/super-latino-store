@@ -227,7 +227,7 @@ import { useToast } from '../composables/useToast'
 
 const toast = useToast()
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')
 const WA_NUMBER = import.meta.env.VITE_WA_NUMBER || '18038886188'
 const STORE_MAPS_URL = 'https://maps.google.com/?q=10171+Two+Notch+Rd+Suite+A,+Columbia,+SC+29229'
 const API_BASE = API_URL.replace('/api', '')

@@ -208,7 +208,7 @@ import { useCartStore } from '../stores/cart'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api')
 
 const router = useRouter()
 const cartStore = useCartStore()
